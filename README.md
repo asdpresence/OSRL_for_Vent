@@ -15,7 +15,7 @@ Official code for "Offline Safe Reinforcement Learning for Mechanical Ventilatio
 
 <!-- ABOUT THE PROJECT -->
 ## About the Project 
-Mechanical ventilation is a key form of life support for patients with pulmonary impairment.For the first time, we have developed offline safe reinforcement learning models for optimizing mechanical ventilation. These models are based on the BCQ-L (BCQ-Lagrangian) algorithm and the CPQ(Constraints Penalized Q-learning) algorithm. Our evaluation, using FQE (Fitted Q Evaluation), shows that our models outperform traditional methods like BC (Behavior Cloning) and CQL (Conservative Q-Learning), delivering outstanding performance with improved safety. This repository is heavily inspired by the OSRL library for offline safe RL, check them out too!
+Mechanical ventilation is a key form of life support for patients with pulmonary impairment. For the first time, we have developed offline safe reinforcement learning models for optimizing mechanical ventilation. These models are based on the BCQ-L (BCQ-Lagrangian) algorithm and the CPQ(Constraints Penalized Q-learning) algorithm. Our evaluation, using FQE (Fitted Q Evaluation), shows that our models outperform traditional methods like BC (Behavior Cloning) and CQL (Conservative Q-Learning), delivering outstanding performance with improved safety. This repository is heavily inspired by the [OSRL](https://github.com/liuzuxin/OSRL) library for offline safe RL, check them out too!
 
 <!-- INSTALLATION -->
 ## Installation
@@ -70,7 +70,7 @@ Note: The data dictionary and patient trajectory datasets are both essential.
 ```
 python examples/vent/train_vent_bcql.py --task mimic3 --device cuda:0 --name bcql ...
 ```
-the config file and the logs during training will be written to logs\ folder and the training plots can be viewed online using Wandb.
+the config file and the logs during training will be written to logs\ folder and the training plots can be viewed online using [Wandb](https://wandb.ai/site).
 <!-- EVALUATING POLICIES -->
 ## Evaluation
 
