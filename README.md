@@ -70,7 +70,7 @@ Note: The data dictionary and patient trajectory datasets are both essential.
 ```
 python examples/vent/train_vent_bcql.py --task mimic3 --device cuda:0 --name bcql ...
 ```
-the config file and the logs during training will be written to logs\ folder and the training plots can be viewed online using [Wandb](https://wandb.ai/site).
+the config file and the logs during training will be written to logs\ folder and the training plots can be viewed online using [Wandb](https://wandb.ai/home).
 <!-- EVALUATING POLICIES -->
 ## Evaluation
 
