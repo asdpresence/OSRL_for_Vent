@@ -50,23 +50,19 @@ pip install -e .
 Go to https://pytorch.org/get-started/locally/ and follow the instructions to install PyTorch with CUDA capabilities (using **pip**) on your OS and with your CUDA version.
 <!-- PREPROCESSING DATA -->
 ## Processing Data
-1. Data Extraction
-2. Data Imputation
-3. Compute Trajectories
-4. Modify elements
-5. Split the data and create OOD
-
-<!-- The following folders are extra steps which can be taken to potentially improve the performance of the policy. They do not replace the files containing the raw states, actions and rewards but simply create extra files where the data has been processed even more.
-* discretize_actions: Turns 3-tuple of actions into 1 single number for each action
-* remove_intermediate reward: Removes intermediate reward -->
+1. Data Imputation
+2. Data Cleaning(remove outlier, normalization)
+3. Build Dataset
+4. Build Trajectories
 
 To run the data preprocessing: 
-1. Obtain the raw data following the instructions in data_preprocessing/data_extraction folder. You will need to insert your path in the scripts.
-2. within the parent directory, run data preprocessing 
 ```
-python3 data_preprocessing/run.py
+cd preprocessing
+python impute.py
+python preprocess_mimic3_data.py
+python processed_mimic3_episodes.py
 ```
-Note: A more detailed description for each section of data preprocessing is provided in the data preprocessing folder. 
+Note: The data dictionary and patient trajectory datasets are both essential.
 
 
 <!-- TRAINING POLICIES -->
@@ -76,16 +72,6 @@ Note: A more detailed description for each section of data preprocessing is prov
 python examples/vent/train_vent_bcql.py --task mimic3 --device cuda:0 --name bcql ...
 ```
 the config file and the logs during training will be written to logs\ folder and the training plots can be viewed online using Wandb.
-2. Train the policy. Edit the values for the other hyperparameters such as LEARNING_RATE, N_EPOCHS, etc. within the script. The given values are the optimal values that was found in this given problem. The path to the policy weights for each epoch will be output in the console. In the same folder as the policy weights you can find the csv files for all the metrics for the policy at each epoch. 
-```
-python3 training/train_eval_loop.py
-```
-Note: Each run was done with a different train-test split and took around 14 hours to complete. 
-
-Running the above scripts will generate ouputs in `d3rlpy_logs` folder. 
-
-4. Then run `python3 training/get_all_final_policies.py` to get all policies in the correct format for evaluation (modifying `run_num` and `model_num` and `fqe_model_num` to match the parameters you set in step 3 in `training/train_eval_loop.py`).
-
 <!-- EVALUATING POLICIES -->
 ## Evaluation
 
@@ -94,7 +80,7 @@ To evaluate a policy, for example, a BCQ-L policy, simply do:
 cd evaluation
 python BCQL_predicted_actions.py
 python FQE_train.py
-python3 FQE_bcql.py
+python FQE_bcql.py
 ```
 After having all the trained models, you can observe the predicted action distribution using
 ```
